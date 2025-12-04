@@ -3,15 +3,12 @@ import hydra
 from omegaconf import DictConfig
 import sys
 
-# 프로젝트 루트 경로를 찾기 위해 추가 (필요 시)
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 @hydra.main(version_base=None, config_path="../config", config_name="config")
 def main(cfg: DictConfig):
-    # Hydra 설정에서 DB 경로 가져오기
     db_path = cfg.database.path
     
-    # Hydra가 내부적으로 경로를 변경할 수 있으므로, 절대 경로가 아니면 원본 실행 경로 기준으로 보정
     if not os.path.isabs(db_path):
         original_cwd = hydra.utils.get_original_cwd()
         db_path = os.path.join(original_cwd, db_path)
@@ -29,7 +26,6 @@ def main(cfg: DictConfig):
         if response == 'y':
             try:
                 os.remove(db_path)
-                # DuckDB는 .wal 파일도 생성할 수 있으므로 같이 삭제 시도
                 wal_path = db_path + ".wal"
                 if os.path.exists(wal_path):
                     os.remove(wal_path)

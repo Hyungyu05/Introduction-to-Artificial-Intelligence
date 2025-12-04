@@ -6,7 +6,6 @@ class QuantAgent:
         self.model = model_name
 
     def generate_report(self, symbol, tech, senti, fund):
-        # [수정] 현재 날짜를 YYYY-MM-DD 형식으로 가져옴
         today_date = datetime.now().strftime("%Y-%m-%d")
         
         prompt = f"""

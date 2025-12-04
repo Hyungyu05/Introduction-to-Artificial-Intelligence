@@ -6,7 +6,6 @@ class TechnicalAnalyzer:
         if df.empty or len(df) < 30:
             return {"summary": "데이터 부족으로 분석 불가"}
         
-        # Calculate Indicators
         df.set_index('date', inplace=True)
         rsi = df.ta.rsi(length=14).iloc[-1]
         sma_20 = df.ta.sma(length=20).iloc[-1]

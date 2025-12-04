@@ -3,7 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
-# .env 로드
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 load_dotenv()
 
@@ -16,22 +16,18 @@ def debug_fmp_request():
     symbol = "AAPL"
     base_url = "https://financialmodelingprep.com/api/v3"
     
-    # 1. 문서에서 말한 '가장 확실한' Quote 요청 (쿼리 파라미터가 적음)
-    # requests 라이브러리가 URL을 어떻게 만드는지 확인
+
     endpoint = f"/quote/{symbol}"
     url = f"{base_url}{endpoint}"
     params = {"apikey": api_key}
     
     print("----- [진단 1: Quote 요청 URL 구조 확인] -----")
-    # Request 객체를 미리 만들어서 URL이 어떻게 찍히는지 봅니다.
     req = requests.Request('GET', url, params=params)
     prepped = req.prepare()
     
-    # 키 보안을 위해 출력 시에만 마스킹
     masked_url = prepped.url.replace(api_key, "HIDDEN_KEY")
     print(f"👉 생성된 URL: {masked_url}")
     
-    # 실제 요청
     try:
         resp = requests.Session().send(prepped, timeout=10)
         print(f"👉 응답 코드: {resp.status_code}")
@@ -43,8 +39,7 @@ def debug_fmp_request():
         print(f"❌ 연결 오류: {e}")
 
     print("\n----- [진단 2: 재무제표 요청 (파라미터 여러 개)] -----")
-    # 문서: https://financialmodelingprep.com/api/v3/income-statement/AAPL?period=FY&limit=5&apikey=YOUR_API_KEY
-    # 파이썬 딕셔너리로 넘겼을 때 순서나 기호(&, ?)가 잘 붙는지 확인
+
     
     endpoint = f"/income-statement/{symbol}"
     url = f"{base_url}{endpoint}"
@@ -60,7 +55,7 @@ def debug_fmp_request():
     masked_url = prepped.url.replace(api_key, "HIDDEN_KEY")
     print(f"👉 생성된 URL: {masked_url}")
     
-    # 문서 내용 체크: ?로 시작하고 나머지는 &로 연결되었는가?
+
     if "?" in masked_url and "&" in masked_url:
         print("✅ URL 구조 정상 (?와 &가 올바르게 포함됨)")
     
