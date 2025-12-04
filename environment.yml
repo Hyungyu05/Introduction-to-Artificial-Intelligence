@@ -1,0 +1,18 @@
+name: quant-agent
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - numpy
+  - requests
+  - duckdb
+  - hydra-core
+  - omegaconf
+  - pip
+  - pip:
+    - python-dotenv
+    - pandas-ta
+    - ollama
+    - colorlog

@@ -1,0 +1,2 @@
+[2025-12-05 00:56:16,432][httpx][INFO] - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+[2025-12-05 00:57:30,155][httpx][INFO] - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"

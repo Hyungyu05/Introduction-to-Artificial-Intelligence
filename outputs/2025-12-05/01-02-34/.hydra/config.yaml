@@ -1,0 +1,30 @@
+api:
+  polygon:
+    base_url: https://api.polygon.io
+    api_key: ${oc.env:POLYGON_API_KEY}
+    timeout: 30
+    news:
+      limit_per_minute: 5
+  fmp:
+    base_url: https://financialmodelingprep.com/api/v3
+    api_key: ${oc.env:FMP_API_KEY}
+    timeout: 30
+    financials:
+      period: quarter
+      limit: 1
+  ollama:
+    model: gemma3:4b
+    host: http://localhost:11434
+database:
+  path: ${hydra:runtime.cwd}/data/trading_data.duckdb
+settings:
+  level: INFO
+project_name: quant-agent-v2
+symbols:
+- GOOGL
+- AAPL
+- META
+- TSLA
+date_range:
+  start: '2024-12-02'
+  end: '2025-12-02'

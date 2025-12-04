@@ -1,0 +1,6 @@
+base_url: "https://financialmodelingprep.com/api/v3"
+api_key: "${oc.env:FMP_API_KEY}"
+timeout: 30
+financials:
+  period: "quarter"
+  limit: 1
